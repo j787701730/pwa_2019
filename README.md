@@ -1,6 +1,6 @@
 # pwa
 
-> 这是一个 Lavas PWA 项目
+> 
 
 ## npm 相关命令
 
