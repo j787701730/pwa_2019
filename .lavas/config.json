@@ -1,5 +1,5 @@
 {
-    "buildVersion": 1550215382601,
+    "buildVersion": 1550220203665,
     "build": {
         "ssr": false,
         "publicPath": "/",
