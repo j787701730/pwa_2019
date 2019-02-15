@@ -231,4 +231,10 @@
 
         &.fade-leave-active
           opacity 0
+
+  @media screen and (min-width: 1200px)
+    #app
+      width 1200px
+      margin 0 auto
+
 </style>

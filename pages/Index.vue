@@ -6,6 +6,10 @@
           <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
         </v-carousel>
       </div>
+      <div style="height: 10px;"></div>
+      <video controls name="media" style="width: 100%">
+        <source src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
+      </video>
       <v-container fluid style="padding: 10px">
         <v-layout row wrap>
           <v-flex v-for="item in tangShi" :key="item.id" xs12 sm6 md4 lg2>
@@ -74,9 +78,6 @@
             src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
           },
           {
-            src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg"
-          },
-          {
             src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg"
           }
         ],
@@ -129,10 +130,6 @@
 </script>
 
 <style>
-  .tangshi-con {
-
-  }
-
   .banner-con .v-carousel__prev .v-icon.material-icons.theme--dark,
   .banner-con .v-carousel__next .v-icon.material-icons.theme--dark {
     line-height: 46px;

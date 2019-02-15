@@ -1,7 +1,7 @@
 {
     "start_url": "/?utm_source=homescreen",
-    "name": "pwa",
-    "short_name": "pwa",
+    "name": "HCJP",
+    "short_name": "HCJP",
     "icons": [
         {
             "src": "img/icons/android-chrome-512x512.png",
