@@ -19,9 +19,19 @@ export const actions = {
       let result = await axios(url);
       commit(SET_WEATHER, result.data);
     } catch (e) {
-      // TODO with error
-      console.log("error in setWeather");
-      console.log(e);
+      let books = localStorage.getItem('books');
+      let res = [];
+      if (books) {
+        try {
+          res = JSON.parse(books);
+          if (!Array.isArray(res)) {
+            res = [];
+          }
+        } catch (e) {
+          res = [];
+        }
+      }
+      commit(SET_WEATHER, res);
     }
   }
 };

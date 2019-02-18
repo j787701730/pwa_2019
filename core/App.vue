@@ -38,6 +38,7 @@
   import AppSidebar from '@/components/AppSidebar';
   import UpdateToast from '@/components/UpdateToast';
   import {keepAlivePages} from '@/.lavas/router';
+  import {openIndexedDB, addData, clearObjectStore, getAllByCursor} from '@/utils/db.js';
 
   const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
 
@@ -81,6 +82,22 @@
         // https://github.com/lavas-project/lavas/issues/112
         keepAlivePages
       };
+    },
+    created() {
+      openIndexedDB();
+      // clearObjectStore('UseKeyGenerator');
+      // addData('UseKeyGenerator', TestData);
+      getAllByCursor('tang-shi').then(
+        arr => {
+          console.log(arr);
+        }
+      );
+
+//   .then(() => addData(TestData, OB_NAMES.UseKeyPath));
+      // console.log('created');
+    },
+    mounted() {
+      // console.log('mounted');
     },
     methods: {
       ...mapActions('appShell/appSidebar', [
