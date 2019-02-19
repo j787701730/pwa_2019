@@ -26,7 +26,11 @@
         <h2>LAVAS</h2>
         <h4>[ˈlɑ:vəz]</h4>
         <ul>
-          <li v-for="(book,i) in books2" :key="i">{{book.name}} - {{book.author}}</li>
+          <li v-for="(book,i) in books2" :key="i">
+            <router-link :to="{path:'/book-menu',query: { bookId: book.id,bookName:book.name}}">{{book.name}} -
+              {{book.author}}
+            </router-link>
+          </li>
         </ul>
         <v-btn color="primary" @click="dialog = true">xxxx</v-btn>
         <v-dialog v-model="dialog" max-width="290">

@@ -84,14 +84,14 @@
       };
     },
     created() {
-      openIndexedDB();
-      // clearObjectStore('UseKeyGenerator');
-      // addData('UseKeyGenerator', TestData);
-      getAllByCursor('tang-shi').then(
-        arr => {
-          console.log(arr);
-        }
-      );
+      // openIndexedDB();
+      // // clearObjectStore('UseKeyGenerator');
+      // // addData('UseKeyGenerator', TestData);
+      // getAllByCursor('tang-shi').then(
+      //   arr => {
+      //     console.log(arr);
+      //   }
+      // );
 
 //   .then(() => addData(TestData, OB_NAMES.UseKeyPath));
       // console.log('created');
