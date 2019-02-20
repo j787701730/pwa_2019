@@ -5,7 +5,6 @@
 
 import Vue from 'vue';
 import Meta from 'vue-meta';
-import VueWechatTitle from 'vue-wechat-title';
 
 
 import {createRouter} from '@/.lavas/router';
@@ -16,7 +15,10 @@ import Vuetify from 'vuetify';
 Vue.use(Meta);
 
 Vue.use(Vuetify);
-Vue.use(VueWechatTitle);
+
+
+
+
 Vue.config.productionTip = false;
 
 export function createApp() {

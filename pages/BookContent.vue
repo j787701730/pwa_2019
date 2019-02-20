@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-wrapper" v-wechat-title="$route.meta.title=title">
+  <div class="detail-wrapper">
     <v-layout row wrap>
       <v-flex style="padding: 10px">
         <article class="detail-content text-xs-center">
@@ -94,8 +94,8 @@
     name: "BookContent",
     metaInfo() {
       return {
-        title: `${this.$route.query.name}`,
-        titleTemplate: "%s - Lavas",
+        title: this.title,
+        titleTemplate: "%s - HCJP",
         meta: [
           {name: "keywords", content: "lavas PWA"},
           {
@@ -109,7 +109,7 @@
     data() {
       return {
         bookContent: null,
-        title: this.$route.query.name,
+        title: '',
         bookId: this.$route.query.id,
         msg: null
       }
@@ -135,7 +135,6 @@
       setState(this.$store);
     },
     mounted() {
-      document.title = this.title;
       window.scroll(0, 0);
       if (navigator.onLine) {
         this.msg = null;

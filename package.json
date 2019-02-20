@@ -27,7 +27,6 @@
     "lavas-core-vue": "^1.1.11",
     "normalize.css": "^7.0.0",
     "stoppable": "^1.0.4",
-    "vue-wechat-title": "^2.0.5",
     "vuetify": "^1.5.1"
   },
   "devDependencies": {

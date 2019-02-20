@@ -23,6 +23,7 @@ module.exports = {
                 src: 'package.json'
             }
         ],
+      jsSourceMap: false,
         /**
          * alias for webpack
          *

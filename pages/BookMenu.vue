@@ -11,8 +11,7 @@
                         path: '/book-content',
                         query: {
                             id: bookId ,
-                            books_id:item.id,
-                            name:item.name
+                            books_id:item.id
                         }
                     }"
                 style="text-decoration: none"
@@ -58,7 +57,7 @@
     metaInfo() {
       return {
         title: `${this.$route.query.bookName}`,
-        titleTemplate: "%s - Lavas",
+        titleTemplate: "%s - HCJP",
         meta: [
           {name: "keywords", content: "lavas PWA"},
           {

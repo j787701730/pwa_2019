@@ -71,7 +71,7 @@ export default {
   metaInfo() {
     return {
       title: `Detail ${this.$route.params.id}`,
-      titleTemplate: "%s - Lavas",
+      titleTemplate: "%s - HCJP",
       meta: [
         { name: "keywords", content: "lavas PWA" },
         {
