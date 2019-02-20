@@ -19,7 +19,7 @@
         <keep-alive
           :include="[...keepAlivePages]">
           <router-view
-            :key="routerViewKey"
+            :key="$route.fullPath"
             class="app-view"
             :class="[{'app-view-with-header': appHeaderShow}, pageTransitionClass]"
             :data-page-id="$route.fullPath"

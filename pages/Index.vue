@@ -10,6 +10,13 @@
       <video controls style="width: 100%;background: rgba(0,0,0,0.3);">
         <source src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
       </video>
+      <ul style="padding: 15px">
+        <li v-for="(book,i) in books2" :key="i" style="list-style: none">
+          <router-link :to="{path:'/book-menu',query: { bookId: book.id,bookName:book.name}}" style="text-decoration: none;font-size: 1.1em">{{book.name}} -
+            {{book.author}}
+          </router-link>
+        </li>
+      </ul>
       <v-container fluid style="padding: 10px">
         <v-layout row wrap>
           <v-flex v-for="item in tangShi" :key="item.id" xs12 sm6 md4 lg2>
@@ -23,16 +30,7 @@
       </v-container>
 
       <div>
-        <h2>LAVAS</h2>
-        <h4>[ˈlɑ:vəz]</h4>
-        <ul>
-          <li v-for="(book,i) in books2" :key="i">
-            <router-link :to="{path:'/book-menu',query: { bookId: book.id,bookName:book.name}}">{{book.name}} -
-              {{book.author}}
-            </router-link>
-          </li>
-        </ul>
-        <v-btn color="primary" @click="dialog = true">xxxx</v-btn>
+        <v-btn color="primary" @click="dialog = true">diglog</v-btn>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
             <v-card-title class="headline">Use Google's location service?</v-card-title>

@@ -123,13 +123,17 @@
 
     .app-header-middle
       flex 1
-      font-size 1.2em
-
+      font-size 1em
+      height 1.2em
+      overflow hidden
+      line-height 1.2em
+      display block
+      text-align left
+      text-overflow ellipsis
+      white-space nowrap
     // 改变 icon 大小
 
     .app-header-icon
       color $btn-color
-      width 20px
-      height 20px
 
 </style>

@@ -1,10 +1,58 @@
 <template>
-  <div class="detail-wrapper">
+  <div class="detail-wrapper" v-wechat-title="$route.meta.title=title">
     <v-layout row wrap>
       <v-flex style="padding: 10px">
         <article class="detail-content text-xs-center">
-          <header class="detail-title text-xs-center">{{$route.query.name}}</header>
-          <pre style="word-break: break-all;white-space: pre-wrap;text-align: justify">{{bookContent[0].content}}</pre>
+          <header class="detail-title text-xs-center">{{title}}</header>
+          <router-link :to="{
+                        name: 'bookContent',
+                        query: {
+                            id: bookId ,
+                            books_id:bookContent.prev,
+                            name:bookId
+                        }
+                    }"
+                       style="text-decoration: none" v-show="bookContent.prev"
+          >
+            <v-btn color="primary" small style="min-width: 0;margin: 0;">上一章</v-btn>
+          </router-link>
+          <router-link :to="{
+                        name: 'bookContent',
+                        query: {
+                            id: bookId ,
+                            books_id:bookContent.next,
+                            name:bookId
+                        }
+                    }"
+                       style="text-decoration: none" v-show="bookContent.next"
+          >
+            <v-btn color="primary" small style="min-width: 0;margin: 0;">下一章</v-btn>
+          </router-link>
+          <pre style="word-break: break-all;white-space: pre-wrap;text-align: justify;margin: 10px 0 ;">{{bookContent[0].content}}</pre>
+          <router-link :to="{
+                        name: 'bookContent',
+                        query: {
+                            id: bookId ,
+                            books_id:bookContent.prev,
+                            name:bookId
+                        }
+                    }"
+                       style="text-decoration: none" v-show="bookContent.prev"
+          >
+            <v-btn color="primary" small style="min-width: 0;margin: 0;">上一章</v-btn>
+          </router-link>
+          <router-link :to="{
+                        name: 'bookContent',
+                        query: {
+                            id: bookId ,
+                            books_id:bookContent.next,
+                            name:bookId
+                        }
+                    }"
+                       style="text-decoration: none" v-show="bookContent.next"
+          >
+            <v-btn color="primary" small style="min-width: 0;margin: 0;">下一章</v-btn>
+          </router-link>
         </article>
       </v-flex>
     </v-layout>
@@ -37,6 +85,10 @@
     store.dispatch("appShell/appHeader/setAppHeader", state.appHeaderState);
   }
 
+  function changeTitle(store) {
+
+  }
+
   export default {
     name: "BookContent",
     metaInfo() {
@@ -55,12 +107,12 @@
     },
     data() {
       return {
-        bookContent: []
+        bookContent: [],
+        title: this.$route.query.name,
+        bookId: this.$route.query.id
       }
     },
     async asyncData({store, route}) {
-      state.appHeaderState.title = route.query.name;
-      setState(store);
       await store.dispatch("getBookContent/getBookContent", {books_id: route.query.books_id, id: route.query.id});
     },
     computed: {
@@ -72,16 +124,32 @@
     created() {
       localStorage.setItem('bookcontent', JSON.stringify(this.content));
       this.bookContent = this.content;
+      this.title = this.bookContent ? this.bookContent[0].name : '';
+
+      state.appHeaderState.title = this.content ? this.content[0].name : '';
+      setState(this.$store);
+    },
+    mounted() {
+      document.title = this.title;
+      window.scroll(0, 0);
+    },
+    watch: {
+      '$route'(to, from) {
+        console.log(to, from);
+        if (to.fullPath !== from.fullPath) {
+          // next();
+
+        }
+      }
     }
   };
 </script>
 
 <style lang="stylus" scoped>
   .detail-content {
-    line-height: 30px;
+    line-height: 24px;
 
     .detail-title {
-      margin-bottom: 20px;
       padding: 10px 0;
       font-size: 18px;
       font-weight: bold;

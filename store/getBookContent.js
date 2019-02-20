@@ -26,9 +26,6 @@ export const actions = {
       if (content) {
         try {
           res = JSON.parse(content);
-          if (!Array.isArray(res)) {
-            res = [];
-          }
         } catch (e) {
           res = [];
         }

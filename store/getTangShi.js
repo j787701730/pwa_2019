@@ -24,9 +24,6 @@ export const actions = {
       if (tangShis) {
         try {
           res = JSON.parse(tangShis);
-          if (!Array.isArray(res)) {
-            res = [];
-          }
         } catch (e) {
           res = [];
         }
