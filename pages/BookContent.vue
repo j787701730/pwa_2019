@@ -8,11 +8,11 @@
                         name: 'bookContent',
                         query: {
                             id: bookId ,
-                            books_id:bookContent.prev,
+                            books_id:bookContent && bookContent.prev,
                             name:bookId
                         }
                     }"
-                       style="text-decoration: none" v-show="bookContent.prev"
+                       style="text-decoration: none" v-show="bookContent && bookContent.prev"
           >
             <v-btn color="primary" small style="min-width: 0;margin: 0;">上一章</v-btn>
           </router-link>
@@ -20,24 +20,24 @@
                         name: 'bookContent',
                         query: {
                             id: bookId ,
-                            books_id:bookContent.next,
+                            books_id:bookContent && bookContent.next,
                             name:bookId
                         }
                     }"
-                       style="text-decoration: none" v-show="bookContent.next"
+                       style="text-decoration: none" v-show="bookContent && bookContent.next"
           >
             <v-btn color="primary" small style="min-width: 0;margin: 0;">下一章</v-btn>
           </router-link>
-          <pre style="word-break: break-all;white-space: pre-wrap;text-align: justify;margin: 10px 0 ;">{{bookContent[0].content}}</pre>
+          <pre style="word-break: break-all;white-space: pre-wrap;text-align: justify;margin: 10px 0 ;">{{bookContent && bookContent[0].content}}</pre>
           <router-link :to="{
                         name: 'bookContent',
                         query: {
                             id: bookId ,
-                            books_id:bookContent.prev,
+                            books_id:bookContent && bookContent.prev,
                             name:bookId
                         }
                     }"
-                       style="text-decoration: none" v-show="bookContent.prev"
+                       style="text-decoration: none" v-show="bookContent && bookContent.prev"
           >
             <v-btn color="primary" small style="min-width: 0;margin: 0;">上一章</v-btn>
           </router-link>
@@ -45,15 +45,16 @@
                         name: 'bookContent',
                         query: {
                             id: bookId ,
-                            books_id:bookContent.next,
+                            books_id:bookContent && bookContent.next,
                             name:bookId
                         }
                     }"
-                       style="text-decoration: none" v-show="bookContent.next"
+                       style="text-decoration: none" v-show="bookContent && bookContent.next"
           >
             <v-btn color="primary" small style="min-width: 0;margin: 0;">下一章</v-btn>
           </router-link>
         </article>
+        <div v-show="msg">{{msg}}</div>
       </v-flex>
     </v-layout>
   </div>
@@ -107,9 +108,10 @@
     },
     data() {
       return {
-        bookContent: [],
+        bookContent: null,
         title: this.$route.query.name,
-        bookId: this.$route.query.id
+        bookId: this.$route.query.id,
+        msg: null
       }
     },
     async asyncData({store, route}) {
@@ -123,15 +125,23 @@
     },
     created() {
       localStorage.setItem('bookcontent', JSON.stringify(this.content));
-      this.bookContent = this.content;
+      if (this.$route.query.books_id != this.content[0].id) {
+        this.bookContent = null;
+      } else {
+        this.bookContent = this.content;
+      }
       this.title = this.bookContent ? this.bookContent[0].name : '';
-
       state.appHeaderState.title = this.content ? this.content[0].name : '';
       setState(this.$store);
     },
     mounted() {
       document.title = this.title;
       window.scroll(0, 0);
+      if (navigator.onLine) {
+        this.msg = null;
+      } else {
+        this.msg = '网络异常，稍后请刷新重试~';
+      }
     },
     watch: {
       '$route'(to, from) {

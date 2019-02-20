@@ -20,7 +20,7 @@
               </router-link>
             </li>
           </ul>
-
+          <div v-show="msg">{{msg}}</div>
         </article>
       </v-flex>
     </v-layout>
@@ -72,7 +72,8 @@
     data() {
       return {
         bookMenu: [],
-        bookId: this.$route.query.bookId
+        bookId: this.$route.query.bookId,
+        msg: null
       }
     },
     async asyncData({store, route}) {
@@ -88,7 +89,16 @@
     },
     created() {
       localStorage.setItem('bookmenu', JSON.stringify(this.menu));
-      this.bookMenu = this.menu;
+      if (this.$route.query.bookId != this.menu.books_id) {
+        this.bookMenu = [];
+      } else {
+        this.bookMenu = this.menu;
+      }
+      if (navigator.onLine) {
+        this.msg = null;
+      } else {
+        this.msg = '网络异常，稍后请刷新重试~';
+      }
     }
   };
 </script>
