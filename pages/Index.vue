@@ -12,7 +12,8 @@
       </video>
       <ul style="padding: 15px">
         <li v-for="(book,i) in books2" :key="i" style="list-style: none">
-          <router-link :to="{path:'/book-menu',query: { bookId: book.id,bookName:book.name}}" style="text-decoration: none;font-size: 1.1em">{{book.name}} -
+          <router-link :to="{path:'/book-menu',query: { bookId: book.id,bookName:book.name}}"
+                       style="text-decoration: none;font-size: 1.1em">{{book.name}} -
             {{book.author}}
           </router-link>
         </li>
@@ -56,9 +57,9 @@
     store.dispatch("appShell/appHeader/setAppHeader", {
       show: true,
       title: "HCJP",
-      showMenu: true,
+      showMenu: false,
       showBack: false,
-      showLogo: false,
+      showLogo: true,
       actions: [
         {
           icon: "search",

@@ -15,9 +15,11 @@
           @click.native="handleClick('back')">
           <v-icon color="white" class="app-header-icon">arrow_back</v-icon>
         </v-btn>
-        <div v-if="showLogo" @click="handleClick('logo')">
+        <div v-if="showLogo" @click="handleClick('logo')"
+             style="margin: 0 6px;border: 1px solid #fff;border-radius: 4px">
           <slot name="logo">
-            <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-icon"></img>
+            <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-icon"
+                 style="vertical-align: middle;"></img>
           </slot>
         </div>
       </div>
@@ -131,6 +133,7 @@
       text-align left
       text-overflow ellipsis
       white-space nowrap
+
     // 改变 icon 大小
 
     .app-header-icon

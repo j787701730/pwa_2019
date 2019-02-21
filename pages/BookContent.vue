@@ -68,8 +68,8 @@
     appHeaderState: {
       show: true,
       title: "HCJP",
-      showMenu: false,
-      showBack: true,
+      showMenu: true,
+      showBack: false,
       showLogo: false,
       actions: [
         {
@@ -79,15 +79,58 @@
           }
         }
       ]
+    },
+    appSideBarState: {
+      // 头部条的相关配置
+      title: {
+        imageLeft: '',
+        altLeft: '',
+        iconLeft: 'home',
+        text: 'Home',
+        imageRight: '',
+        altRight: '',
+        iconRight: '',
+        route: '/'
+      },
+
+      // user: {
+      //     name: 'Lavas',
+      //     email: 'lavas@baidu.com',
+      //     location: 'Shanghai'
+      // },
+
+      // 分块组
+      blocks: [
+        {
+          // 子列表1
+          // sublistTitle: 'Sublist1',
+          list: [
+            {
+              text: 'Detail Page 11111',
+              icon: 'sentiment_satisfied',
+              route: '/detail/1'
+            },
+            {
+              text: 'Detail Page 22222',
+              icon: 'sentiment_satisfied',
+              alt: 'mood-bad',
+              route: '/detail/2'
+            },
+            {
+              text: 'Detail Page 33333',
+              icon: 'sentiment_neutral',
+              route: '/detail/3'
+            }
+          ]
+        }
+      ]
     }
   };
 
+
   function setState(store) {
     store.dispatch("appShell/appHeader/setAppHeader", state.appHeaderState);
-  }
-
-  function changeTitle(store) {
-
+    store.dispatch("appShell/appSidebar/setAppSiderBar", state.appSideBarState);
   }
 
   export default {
@@ -111,14 +154,17 @@
         bookContent: null,
         title: '',
         bookId: this.$route.query.id,
-        msg: null
+        msg: null,
+        bookMenu: null
       }
     },
     async asyncData({store, route}) {
       await store.dispatch("getBookContent/getBookContent", {books_id: route.query.books_id, id: route.query.id});
+      await store.dispatch("getContentBookMenu/getContentBookMenu", route.query.id);
     },
     computed: {
-      ...mapState("getBookContent", ["content"])
+      ...mapState("getBookContent", ["content"]),
+      ...mapState("getContentBookMenu", ["menu"])
     },
     activated() {
       setState(this.$store);
@@ -132,7 +178,30 @@
       }
       this.title = this.bookContent ? this.bookContent[0].name : '';
       state.appHeaderState.title = this.content ? this.content[0].name : '';
+
+      localStorage.setItem('contentbookmenu', JSON.stringify(this.menu)); // 内容页的书目
+      let list = [];
+      if (this.menu && Array.isArray(this.menu.data)) {
+        for (let me of this.menu.data) {
+          list.push({
+            text: me.name,
+            icon: null,
+            route: `/book-content?id=${this.$route.query.id}&books_id=${me.id}`,
+            id: me.id
+          })
+        }
+      }
+      state.appSideBarState.blocks[0].list = list;
+      state.appSideBarState.title.text = this.content.name;
+      state.appSideBarState.title.iconLeft = 'book';
+      state.appSideBarState.title.route = `/book-menu?bookId=${this.$route.query.id}&bookName=${this.content.name}`;
       setState(this.$store);
+
+      if (this.$route.query.id !== this.menu.books_id) {
+        this.bookMenu = [];
+      } else {
+        this.bookMenu = this.menu;
+      }
     },
     mounted() {
       window.scroll(0, 0);
@@ -160,7 +229,7 @@
 
     .detail-title {
       padding: 10px 0;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
     }
   }

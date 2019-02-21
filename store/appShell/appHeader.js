@@ -27,7 +27,7 @@ export const state = () => {
          * @type {object}
          */
         logoIcon: {
-            src: '',
+            src: '/static/img/icons/favicon-32x32.png',
             alt: ''
         },
 

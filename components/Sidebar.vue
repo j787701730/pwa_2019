@@ -20,7 +20,8 @@
             <div class="touch-toggle"
                 :style="{
                     'opacity': opacity,
-                    'padding-left': widthProp
+                    'padding-left': widthProp,
+                    'touch-action':'none'
                 }"
                 ref="sidebarToggle"
                 @click.stop.prevent="toggleClick"
