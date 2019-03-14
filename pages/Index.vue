@@ -31,6 +31,7 @@
       </v-container>
 
       <div>
+        <form action="weatherDownload" method="post"><input class="v-btn theme--light success" type="submit" value="炜天气"></form>
         <v-btn color="primary" @click="dialog = true">diglog</v-btn>
         <v-dialog v-model="dialog" max-width="290">
           <v-card>
